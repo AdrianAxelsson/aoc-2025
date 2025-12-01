@@ -26,7 +26,7 @@ fn main() {
                 zero_pass_count += 1
             }
         }
-        if position.rem_euclid(100) == 0 {
+        if position == 0 {
             zero_count += 1
         }
     }
