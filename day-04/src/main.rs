@@ -34,7 +34,7 @@ fn main() -> std::io::Result<()> {
         rolls_removed = false;
         for y in 0..grid.len() {
             for x in 0..grid[y].len() {
-                if grid[y][x] == '@' {
+                if is_roll(&grid, x, y) {
                     if get_neighbor_roll_count(&grid, x, y) < 4 {
                         p2 += 1;
                         grid[y][x] = '.';
@@ -82,15 +82,9 @@ fn get_neighbor_roll_count(grid: &Vec<Vec<char>>, x: usize, y: usize) -> u32 {
 }
 
 fn is_roll(grid: &Vec<Vec<char>>, x: usize, y: usize) -> bool {
-    let grid_value = grid
-        .get(y)
+    grid.get(y)
         .and_then(|row| row.get(x))
         .copied()
-        .unwrap_or('.');
-
-    match grid_value {
-        '@' => true,
-        '.' => false,
-        _ => panic!("Invalid char in input"),
-    }
+        .unwrap_or('.')
+        == '@'
 }
