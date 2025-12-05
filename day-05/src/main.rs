@@ -34,7 +34,7 @@ fn main() -> std::io::Result<()> {
     // Part 1
     for &(start, end) in ranges.iter() {
         for &ingredient in ingredients.iter() {
-            if ingredient > start && ingredient <= end {
+            if ingredient >= start && ingredient <= end {
                 fresh_ingredients.insert(ingredient);
             }
         }
