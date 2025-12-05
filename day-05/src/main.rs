@@ -1,4 +1,3 @@
-use std::collections::HashSet;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
@@ -8,7 +7,7 @@ fn main() -> std::io::Result<()> {
 
     let mut ranges: Vec<(usize, usize)> = vec![];
     let mut ingredients: Vec<usize> = vec![];
-    let mut fresh_ingredients = HashSet::new();
+    let mut fresh_ingredients = vec![];
 
     let input_file = File::open("data/input.txt")?;
     let reader = BufReader::new(input_file);
@@ -32,10 +31,11 @@ fn main() -> std::io::Result<()> {
     ranges.sort();
 
     // Part 1
-    for &(start, end) in ranges.iter() {
-        for &ingredient in ingredients.iter() {
+    for &ingredient in ingredients.iter() {
+        for &(start, end) in ranges.iter() {
             if ingredient >= start && ingredient <= end {
-                fresh_ingredients.insert(ingredient);
+                fresh_ingredients.push(ingredient);
+                break;
             }
         }
     }
